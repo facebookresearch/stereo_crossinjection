@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crossinj"
+version = "0.1.0"
+description = "Left-right-consistent iterative stereo matching via cross-injection"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "LicenseRef-FAIR-Noncommercial-Research AND CC-BY-NC-4.0"
+license-files = ["LICENSE"]
+# huggingface_hub provides the `hf` CLI and crossinj.hub's downloads.
+dependencies = ["torch>=2.5", "numpy<2", "opencv-python-headless", "huggingface_hub>=0.34"]
+
+# The upstream stereo matchers are deliberately NOT dependencies: they are
+# non-commercial research licences, referenced as git submodules under
+# third_party/ rather than redistributed (apart from an adapted excerpt of
+# S2M2's correlation lookup in crossinj/compat.py, still under CC BY-NC 4.0,
+# hence the second term of `license` above).
+
+[project.optional-dependencies]
+dev = ["pytest"]
+# FoundationStereo's own imports (core/ pulls in its Utils.py), not ours.
+# Install torch and torchvision first (environment.yml pins matching builds);
+# otherwise pip resolves the newest torchvision and upgrades torch with it.
+foundationstereo = [
+    "torchvision", "timm", "einops", "omegaconf", "scipy", "imageio",
+    "pandas", "trimesh", "joblib", "open3d",
+]
+
+[tool.setuptools.packages.find]
+include = ["crossinj*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

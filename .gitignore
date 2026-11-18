@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+checkpoints/
+*.pth
+out/
+
+# Benchmark samples are not redistributed here -- they carry their own dataset
+# licences. Build them locally (scripts/make_middlebury_sample.py).
+*.npy

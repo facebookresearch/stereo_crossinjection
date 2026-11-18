@@ -1,0 +1,8 @@
+[submodule "third_party/s2m2"]
+	path = third_party/s2m2
+	url = https://github.com/junhong-3dv/s2m2.git
+	ignore = untracked
+[submodule "third_party/FoundationStereo"]
+	path = third_party/FoundationStereo
+	url = https://github.com/NVlabs/FoundationStereo.git
+	ignore = untracked

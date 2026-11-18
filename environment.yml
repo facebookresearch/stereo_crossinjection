@@ -1,0 +1,23 @@
+# conda env create -f environment.yml && conda activate crossinj
+# pip install -e .                       # or -e ".[foundationstereo]"
+#
+# CPU builds of torch / torchvision so the demo runs anywhere. For GPU, swap the
+# index URL and the "+cpu" suffixes for the CUDA build matching your driver,
+# e.g. https://download.pytorch.org/whl/cu126 and torch==2.6.0+cu126.
+name: crossinj
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cpu
+      # The versions this was tested against. torchvision is pinned here so
+      # that the [foundationstereo] extra does not pull in a newer torch.
+      - torch==2.6.0+cpu
+      - torchvision==0.21.0+cpu
+      - numpy<2
+      - opencv-python-headless
+      - huggingface_hub>=0.34       # the `hf` CLI, checkpoint downloads
+      - imageio
+      - pytest
